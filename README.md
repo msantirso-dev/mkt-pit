@@ -91,9 +91,13 @@ Repositorio GitHub: **https://github.com/msantirso-dev/mkt-pit** (rama `main`)
    - Tipo: **Public Repository** (o Private si conectaste GitHub).
    - URL del repo: `https://github.com/msantirso-dev/mkt-pit`
    - Rama: `main`
-   - **Build Pack:** `Dockerfile` (usar el `Dockerfile` incluido en la raíz).
+   - **Build Pack:** `Docker Compose`
+   - **Docker Compose Location:** `/docker-compose.yaml`
+   - **Base Directory:** `/`
    - **Puerto expuesto:** `3000`
    - **Dominio:** asignar uno (ej. `batev.pit.com.ar` o el que uses en la feria).
+
+   > Si preferís un solo contenedor sin Compose, usá Build Pack **Dockerfile** en su lugar.
 
 4. **Variables de entorno** (en el servicio de la app)
 

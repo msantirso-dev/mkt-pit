@@ -1,0 +1,19 @@
+# Coolify — usar este archivo (Build Pack: Docker Compose)
+# PostgreSQL debe crearse como recurso separado en Coolify.
+# Configurar DATABASE_URL, ADMIN_PASSWORD y NEXT_PUBLIC_APP_URL en Environment Variables.
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      AI_ENABLED: ${AI_ENABLED:-false}
+      OLLAMA_URL: ${OLLAMA_URL:-}
+      AI_MODEL: ${AI_MODEL:-llama3.2}
