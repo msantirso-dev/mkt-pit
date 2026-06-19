@@ -1,65 +1,107 @@
-import Image from "next/image";
+import Link from "next/link";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { Button } from "@/components/ui/Button";
+import { PiLogo } from "@/components/brand/PiLogo";
 
-export default function Home() {
+const features = [
+  {
+    icon: "📘",
+    title: "Libro digital gratuito",
+    description: "Guía completa sobre hogares inteligentes",
+  },
+  {
+    icon: "🎧",
+    title: "Audiolibro",
+    description: "Aprendé mientras te movés",
+  },
+  {
+    icon: "🎙️",
+    title: "Podcast exclusivo",
+    description: "Contenido premium para profesionales",
+  },
+  {
+    icon: "✅",
+    title: "Checklist profesional",
+    description: "Lista de verificación para obras",
+  },
+  {
+    icon: "🔧",
+    title: "Guía de preinstalación",
+    description: "Canalizaciones y rack técnico",
+  },
+  {
+    icon: "📊",
+    title: "Diagnóstico personalizado",
+    description: "Score tecnológico de tu proyecto",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <SiteHeader />
+      <main className="flex-1 hero-glow">
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:py-24 text-center">
+          <div className="flex justify-center mb-8">
+            <PiLogo size="xl" showUrl align="center" priority />
+          </div>
+          <p className="text-pi-red text-sm uppercase tracking-widest mb-4 font-medium">
+            Jaime Smart Advisor · BATEV
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+            <span className="gradient-text">
+              La casa inteligente empieza antes de colocar el primer ladrillo
+            </span>
+          </h1>
+          <p className="mt-6 text-muted text-base sm:text-lg max-w-2xl mx-auto">
+            Jaime Smart Advisor te ayuda a evaluar la preparación tecnológica de
+            tu obra: domótica, seguridad, conectividad, energía solar e
+            inteligencia artificial.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/diagnostico">
+              <Button size="lg">Comenzar diagnóstico gratuito</Button>
+            </Link>
+            <Link href="/batev">
+              <Button variant="outline" size="lg">
+                Stand BATEV
+              </Button>
+            </Link>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-4 pb-16">
+          <h2 className="text-2xl font-bold text-center mb-10">
+            Qué recibís al completar el diagnóstico
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((f) => (
+              <div key={f.title} className="glass-card rounded-2xl p-6">
+                <span className="text-3xl">{f.icon}</span>
+                <h3 className="font-semibold mt-3">{f.title}</h3>
+                <p className="text-sm text-muted mt-2">{f.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-4xl px-4 pb-20 text-center">
+          <div className="glass-card rounded-2xl p-8 sm:p-12">
+            <h2 className="text-2xl font-bold mb-4">
+              Tecnología, seguridad y confort en un solo diagnóstico
+            </h2>
+            <p className="text-muted mb-6">
+              Diseñado para arquitectos, constructores, desarrolladores y
+              propietarios que quieren evitar errores costosos en obra.
+            </p>
+            <Link href="/diagnostico">
+              <Button size="lg">Empezar ahora — es gratis</Button>
+            </Link>
+          </div>
+        </section>
       </main>
-    </div>
+      <SiteFooter />
+    </>
   );
 }

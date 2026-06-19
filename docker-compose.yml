@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: jaime
+      POSTGRES_PASSWORD: jaime_secret
+      POSTGRES_DB: jaime_smart_advisor
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jaime -d jaime_smart_advisor"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://jaime:jaime_secret@db:5432/jaime_smart_advisor?schema=public
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      AI_ENABLED: ${AI_ENABLED:-false}
+      OLLAMA_URL: ${OLLAMA_URL:-http://ollama:11434}
+      AI_MODEL: ${AI_MODEL:-llama3.2}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    profiles:
+      - ai
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  postgres_data:
+  ollama_data:

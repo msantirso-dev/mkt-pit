@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id              String           @id @default(cuid())
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  firstName       String
+  lastName        String
+  email           String
+  whatsapp        String?
+  company         String?
+  role            String?
+  city            String?
+  profile         String
+  projectType     String
+  projectStage    String
+  projectTiming   String
+  interests       Json
+  technicalScore  Int              @default(0)
+  commercialScore Int              @default(0)
+  leadTemperature String           @default("Frío")
+  status          String           @default("Nuevo")
+  notes           String?
+  testAnswers     TestAnswer[]
+  resourceAccess  ResourceAccess[]
+  adminNotes      AdminNote[]
+}
+
+model TestAnswer {
+  id           String @id @default(cuid())
+  leadId       String
+  questionKey  String
+  questionText String
+  answer       String
+  score        Int
+  lead         Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+}
+
+model ResourceAccess {
+  id           String   @id @default(cuid())
+  leadId       String
+  resourceName String
+  accessedAt   DateTime @default(now())
+  lead         Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+}
+
+model AdminNote {
+  id        String   @id @default(cuid())
+  leadId    String
+  note      String
+  createdAt DateTime @default(now())
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId])
+}
