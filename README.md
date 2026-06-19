@@ -2,6 +2,8 @@
 
 Landing premium de captación de leads para **BATEV** · **PI Proyectos Inteligentes**.
 
+Repositorio: [github.com/msantirso-dev/mkt-pit](https://github.com/msantirso-dev/mkt-pit)
+
 Visitantes escanean un QR, completan sus datos, realizan un diagnóstico tecnológico de su obra, reciben un kit digital gratuito y quedan registrados en un panel administrativo.
 
 ## Stack
@@ -75,18 +77,72 @@ Abrir [http://localhost:3000](http://localhost:3000)
 
 ## Deploy en Coolify
 
-### Opción A — Dockerfile (recomendado)
+Repositorio GitHub: **https://github.com/msantirso-dev/mkt-pit** (rama `main`)
 
-El proyecto incluye `Dockerfile` con output standalone de Next.js y migraciones automáticas al iniciar.
+### Paso a paso en Coolify
 
-1. Crear servicio en Coolify usando **Dockerfile** de este repositorio.
-2. Agregar PostgreSQL y vincular `DATABASE_URL`.
-3. Variables de entorno obligatorias:
-   - `DATABASE_URL`
-   - `ADMIN_PASSWORD`
-   - `NEXT_PUBLIC_APP_URL`
-4. Puerto expuesto: `3000`
-5. El entrypoint ejecuta `prisma migrate deploy` antes de `node server.js`.
+1. **Nuevo proyecto** en Coolify (ej. `PI Marketing` o `BATEV`).
+
+2. **Agregar PostgreSQL**
+   - Crear recurso **PostgreSQL** en el mismo proyecto.
+   - Anotar la URL interna que genera Coolify (formato `postgresql://user:pass@postgres:5432/database`).
+
+3. **Agregar aplicación desde Git**
+   - Tipo: **Public Repository** (o Private si conectaste GitHub).
+   - URL del repo: `https://github.com/msantirso-dev/mkt-pit`
+   - Rama: `main`
+   - **Build Pack:** `Dockerfile` (usar el `Dockerfile` incluido en la raíz).
+   - **Puerto expuesto:** `3000`
+   - **Dominio:** asignar uno (ej. `batev.pit.com.ar` o el que uses en la feria).
+
+4. **Variables de entorno** (en el servicio de la app)
+
+```env
+DATABASE_URL=postgresql://USER:PASSWORD@NOMBRE-SERVICIO-POSTGRES:5432/DATABASE
+ADMIN_PASSWORD=una-contraseña-segura
+NEXT_PUBLIC_APP_URL=https://tu-dominio-asignado.com
+```
+
+| Variable | Descripción |
+|---|---|
+| `DATABASE_URL` | Copiar desde el servicio PostgreSQL de Coolify (conexión interna) |
+| `ADMIN_PASSWORD` | Contraseña del panel `/admin` |
+| `NEXT_PUBLIC_APP_URL` | URL pública **exacta** con `https://` (usada por el QR) |
+
+Opcionales:
+
+```env
+AI_ENABLED=false
+OLLAMA_URL=http://ollama:11434
+AI_MODEL=llama3.2
+```
+
+5. **Deploy**
+   - Coolify construye la imagen con el `Dockerfile`.
+   - Al iniciar, el contenedor ejecuta `prisma migrate deploy` y luego `node server.js`.
+   - Verificar logs: debe aparecer `Running Prisma migrations...` y `Starting Jaime Smart Advisor...`.
+
+6. **Probar**
+   - Landing: `https://tu-dominio/`
+   - QR feria: `https://tu-dominio/batev`
+   - Admin: `https://tu-dominio/admin`
+   - QR imprimible: `https://tu-dominio/admin/qr` (después de login)
+
+7. **QR del stand**
+   - Configurá `NEXT_PUBLIC_APP_URL` **antes** de imprimir el cartel.
+   - El QR apunta a `{NEXT_PUBLIC_APP_URL}/batev`.
+
+### Volúmenes opcionales
+
+Montar en Coolify un volumen persistente en `/app/public/resources` si querés actualizar PDFs y audios del kit digital sin redeploy.
+
+### Opción alternativa — Build manual (sin Dockerfile)
+
+Si preferís Nixpacks/Node en lugar del Dockerfile:
+
+- **Build command:** `npx prisma generate && npx prisma migrate deploy && npm run build`
+- **Start command:** `npm run start`
+- **Puerto:** `3000`
 
 ```bash
 # Probar localmente con Docker Compose
@@ -96,32 +152,11 @@ docker compose up --build
 docker compose --profile ai up --build
 ```
 
-### Opción B — Build manual
-
-1. Crear un servicio **Next.js** en Coolify apuntando a este repositorio.
-2. Agregar una base de datos **PostgreSQL** en el mismo proyecto.
-3. Configurar variables de entorno:
-   - `DATABASE_URL` (desde el servicio PostgreSQL de Coolify)
-   - `ADMIN_PASSWORD`
-   - `NEXT_PUBLIC_APP_URL` (dominio asignado)
-4. Comando de build:
-
-```bash
-npx prisma generate && npx prisma migrate deploy && npm run build
-```
-
-5. Comando de inicio:
-
-```bash
-npm run start
-```
-
-6. Exponer el puerto `3000` (o el que configure Coolify).
-
 ### Notas Coolify
 
-- Montar la carpeta `public/resources/` como volumen persistente si querés actualizar PDFs/audios sin redeploy.
-- Ejecutar `npx prisma migrate deploy` en cada deploy con cambios de schema.
+- El servicio PostgreSQL y la app deben estar en el **mismo proyecto** de Coolify para usar la red interna.
+- Tras cambiar `NEXT_PUBLIC_APP_URL`, redeployá la app para que el QR use el dominio correcto.
+- Ejecutar `npx prisma migrate deploy` en cada deploy con cambios de schema (el Dockerfile ya lo hace al iniciar).
 
 ## Cargar recursos digitales
 
