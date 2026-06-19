@@ -67,6 +67,7 @@ Abrir [http://localhost:3000](http://localhost:3000)
 |---|---|
 | `/` | Landing principal |
 | `/batev` | Página QR feria BATEV |
+| `/expo-batev` | Info BATEV 2026 + preacreditación |
 | `/diagnostico` | Formulario + test |
 | `/resultado/[leadId]` | Resultado personalizado |
 | `/biblioteca/[leadId]` | Kit digital |

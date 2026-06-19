@@ -22,10 +22,16 @@ export default function BatevPage() {
           <div className="flex justify-center mb-6">
             <PiLogo size="lg" showUrl align="center" priority />
           </div>
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 flex flex-col sm:flex-row items-center justify-center gap-3">
             <span className="inline-block rounded-full border border-pi-red/30 bg-pi-red/10 px-4 py-1 text-xs text-pi-red uppercase tracking-widest">
               BATEV 2026
             </span>
+            <Link
+              href="/expo-batev"
+              className="text-xs text-electric hover:underline"
+            >
+              Info de la expo y acreditación →
+            </Link>
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
