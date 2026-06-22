@@ -3,15 +3,15 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Button } from "@/components/ui/Button";
 import { PiLogo } from "@/components/brand/PiLogo";
-import { PodcastPlayer } from "@/components/ui/PodcastPlayer";
+import { KitItemCard } from "@/components/ui/KitItemCard";
 
 const kitItems = [
-  { icon: "📘", title: "Libro digital gratuito", desc: "De la cueva al hogar inteligente" },
-  { icon: "🎧", title: "Audiolibro", desc: "Escuchalo donde quieras" },
-  { icon: "🎙️", title: "Podcast exclusivo BATEV", desc: "¿Cada inteligente? — PI Proyectos Inteligentes" },
-  { icon: "✅", title: "Checklist profesional", desc: "Para viviendas inteligentes" },
-  { icon: "🔧", title: "Guía de preinstalación", desc: "Canalizaciones recomendadas" },
-  { icon: "📊", title: "Diagnóstico personalizado", desc: "Score tecnológico de tu obra" },
+  { id: "libro", icon: "📘", title: "Libro digital gratuito", desc: "De la cueva al hogar inteligente" },
+  { id: "audiolibro", icon: "🎧", title: "Audiolibro", desc: "Escuchalo donde quieras" },
+  { id: "podcast", icon: "🎙️", title: "Podcast exclusivo BATEV", desc: "¿Cada inteligente? — PI Proyectos Inteligentes" },
+  { id: "checklist", icon: "✅", title: "Checklist profesional", desc: "Para viviendas inteligentes" },
+  { id: "canalizaciones", icon: "🔧", title: "Guía de preinstalación", desc: "Canalizaciones recomendadas" },
+  { id: "diagnostico", icon: "📊", title: "Diagnóstico personalizado", desc: "Score tecnológico de tu obra" },
 ];
 
 export default function BatevPage() {
@@ -50,22 +50,9 @@ export default function BatevPage() {
             </div>
           </div>
 
-          <div className="mt-12 max-w-2xl mx-auto">
-            <PodcastPlayer />
-          </div>
-
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {kitItems.map((item) => (
-              <div
-                key={item.title}
-                className="glass-card rounded-2xl p-5 flex items-start gap-4"
-              >
-                <span className="text-2xl">{item.icon}</span>
-                <div>
-                  <h3 className="font-medium">{item.title}</h3>
-                  <p className="text-sm text-muted mt-1">{item.desc}</p>
-                </div>
-              </div>
+              <KitItemCard key={item.id} item={item} />
             ))}
           </div>
 

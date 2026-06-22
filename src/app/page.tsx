@@ -3,34 +3,41 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Button } from "@/components/ui/Button";
 import { PiLogo } from "@/components/brand/PiLogo";
+import { KitItemCard } from "@/components/ui/KitItemCard";
 
 const features = [
   {
+    id: "libro",
     icon: "📘",
     title: "Libro digital gratuito",
     description: "Guía completa sobre hogares inteligentes",
   },
   {
+    id: "audiolibro",
     icon: "🎧",
     title: "Audiolibro",
     description: "Aprendé mientras te movés",
   },
   {
+    id: "podcast",
     icon: "🎙️",
-    title: "Podcast exclusivo",
-    description: "Contenido premium para profesionales",
+    title: "Podcast exclusivo BATEV",
+    description: "¿Cada inteligente? — PI Proyectos Inteligentes",
   },
   {
+    id: "checklist",
     icon: "✅",
     title: "Checklist profesional",
     description: "Lista de verificación para obras",
   },
   {
+    id: "canalizaciones",
     icon: "🔧",
     title: "Guía de preinstalación",
     description: "Canalizaciones y rack técnico",
   },
   {
+    id: "diagnostico",
     icon: "📊",
     title: "Diagnóstico personalizado",
     description: "Score tecnológico de tu proyecto",
@@ -77,11 +84,15 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f) => (
-              <div key={f.title} className="glass-card rounded-2xl p-6">
-                <span className="text-3xl">{f.icon}</span>
-                <h3 className="font-semibold mt-3">{f.title}</h3>
-                <p className="text-sm text-muted mt-2">{f.description}</p>
-              </div>
+              <KitItemCard
+                key={f.id}
+                item={{
+                  id: f.id,
+                  icon: f.icon,
+                  title: f.title,
+                  desc: f.description,
+                }}
+              />
             ))}
           </div>
         </section>
