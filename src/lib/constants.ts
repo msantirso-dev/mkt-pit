@@ -145,14 +145,15 @@ export const ANSWER_SCORES: Record<(typeof ANSWER_OPTIONS)[number], number> = {
 };
 
 export const PODCAST_URL = "/resources/podcast.m4a";
+export const LIBRO_URL = "/resources/libro.pdf";
 
 export const DIGITAL_RESOURCES = [
   {
     id: "libro",
     title: "De la cueva al hogar inteligente",
-    description: "Libro digital sobre evolución del hogar inteligente",
+    description: "Libro digital V8 — evolución del hogar inteligente",
     type: "pdf" as const,
-    url: "/resources/libro.pdf",
+    url: LIBRO_URL,
   },
   {
     id: "audiolibro",
