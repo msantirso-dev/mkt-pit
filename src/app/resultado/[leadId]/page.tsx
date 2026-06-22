@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ScoreCard } from "@/components/ui/ScoreCard";
 import { Button } from "@/components/ui/Button";
 import { JaimeAdvice, JaimeAdviceSkeleton } from "@/components/ai/JaimeAdvice";
+import { PodcastPlayer } from "@/components/ui/PodcastPlayer";
 import {
   getTechnicalCategory,
   getTechnicalSummary,
@@ -88,6 +89,13 @@ export default async function ResultadoPage({ params }: PageProps) {
               interests={lead.interests as string[]}
             />
           </Suspense>
+
+          <div className="mt-8">
+            <p className="text-sm text-muted mb-3 text-center">
+              Escuchá ahora el podcast exclusivo de BATEV
+            </p>
+            <PodcastPlayer />
+          </div>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <Link href={`/biblioteca/${leadId}`} className="flex-1">

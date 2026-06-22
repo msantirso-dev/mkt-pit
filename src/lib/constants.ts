@@ -144,6 +144,8 @@ export const ANSWER_SCORES: Record<(typeof ANSWER_OPTIONS)[number], number> = {
   No: 0,
 };
 
+export const PODCAST_URL = "/resources/podcast.m4a";
+
 export const DIGITAL_RESOURCES = [
   {
     id: "libro",
@@ -164,7 +166,7 @@ export const DIGITAL_RESOURCES = [
     title: "Podcast: ¿Cada inteligente?",
     description: "Podcast exclusivo BATEV — PI Proyectos Inteligentes",
     type: "audio" as const,
-    url: "/resources/podcast.m4a",
+    url: PODCAST_URL,
   },
   {
     id: "checklist",

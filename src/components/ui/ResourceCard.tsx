@@ -23,14 +23,12 @@ export function ResourceCard({
   url,
   onAccess,
 }: ResourceCardProps) {
-  const handleClick = () => {
+  const handleOpen = () => {
     onAccess?.();
-    if (type === "meeting") {
-      window.open(url, "_blank");
-    } else {
-      window.open(url, "_blank");
-    }
+    window.open(url, "_blank");
   };
+
+  const isAudio = type === "audio";
 
   return (
     <div className="glass-card rounded-2xl p-5 flex flex-col gap-4">
@@ -41,14 +39,37 @@ export function ResourceCard({
           <p className="text-sm text-muted mt-1">{description}</p>
         </div>
       </div>
-      <Button
-        variant={type === "meeting" ? "success" : "outline"}
-        size="sm"
-        fullWidth
-        onClick={handleClick}
-      >
-        {type === "meeting" ? "Solicitar reunión" : "Descargar / Acceder"}
-      </Button>
+
+      {isAudio && (
+        <audio controls preload="metadata" className="w-full rounded-lg" src={url}>
+          Tu navegador no soporta audio HTML5.
+        </audio>
+      )}
+
+      <div className="flex flex-col gap-2">
+        <Button
+          variant={type === "meeting" ? "success" : "outline"}
+          size="sm"
+          fullWidth
+          onClick={handleOpen}
+        >
+          {type === "meeting"
+            ? "Solicitar reunión"
+            : isAudio
+              ? "Abrir en nueva pestaña"
+              : "Descargar / Acceder"}
+        </Button>
+        {type !== "meeting" && (
+          <a
+            href={url}
+            download={isAudio ? undefined : true}
+            onClick={() => onAccess?.()}
+            className="text-xs text-electric hover:underline break-all text-center"
+          >
+            {url}
+          </a>
+        )}
+      </div>
     </div>
   );
 }

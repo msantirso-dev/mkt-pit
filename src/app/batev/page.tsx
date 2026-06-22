@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Button } from "@/components/ui/Button";
 import { PiLogo } from "@/components/brand/PiLogo";
+import { PodcastPlayer } from "@/components/ui/PodcastPlayer";
 
 const kitItems = [
   { icon: "📘", title: "Libro digital gratuito", desc: "De la cueva al hogar inteligente" },
@@ -47,6 +48,10 @@ export default function BatevPage() {
                 <Button size="lg">Comenzar diagnóstico gratuito</Button>
               </Link>
             </div>
+          </div>
+
+          <div className="mt-12 max-w-2xl mx-auto">
+            <PodcastPlayer />
           </div>
 
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
