@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { CHECKLIST_URL } from "@/lib/checklist";
 import { LIBRO_URL, PODCAST_URL } from "@/lib/constants";
 import { Button } from "./Button";
 
@@ -41,6 +43,28 @@ export function KitItemCard({ item }: KitItemCardProps) {
           </a>
         </div>
       </div>
+    );
+  }
+
+  if (item.id === "checklist") {
+    return (
+      <Link
+        href={CHECKLIST_URL}
+        className="glass-card rounded-2xl p-5 flex flex-col gap-4 border border-success/20 hover:border-success/40 transition-colors group"
+      >
+        <div className="flex items-start gap-4">
+          <span className="text-2xl">{item.icon}</span>
+          <div>
+            <h3 className="font-medium group-hover:text-success transition-colors">
+              {item.title}
+            </h3>
+            <p className="text-sm text-muted mt-1">{item.desc}</p>
+          </div>
+        </div>
+        <Button variant="outline" size="sm" className="pointer-events-none">
+          Ver checklist interactivo →
+        </Button>
+      </Link>
     );
   }
 

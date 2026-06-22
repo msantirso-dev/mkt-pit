@@ -1,3 +1,5 @@
+import { CHECKLIST_URL } from "./checklist";
+
 export const PROFILES = [
   "Arquitecto",
   "Constructor",
@@ -172,9 +174,9 @@ export const DIGITAL_RESOURCES = [
   {
     id: "checklist",
     title: "Checklist profesional para viviendas inteligentes",
-    description: "Lista de verificación para profesionales",
-    type: "pdf" as const,
-    url: "/resources/checklist.pdf",
+    description: "Checklist interactivo con todos los puntos clave de obra",
+    type: "page" as const,
+    url: CHECKLIST_URL,
   },
   {
     id: "canalizaciones",
