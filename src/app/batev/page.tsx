@@ -7,7 +7,7 @@ import { PiLogo } from "@/components/brand/PiLogo";
 const kitItems = [
   { icon: "📘", title: "Libro digital gratuito", desc: "De la cueva al hogar inteligente" },
   { icon: "🎧", title: "Audiolibro", desc: "Escuchalo donde quieras" },
-  { icon: "🎙️", title: "Podcast exclusivo BATEV", desc: "Solo para visitantes de la feria" },
+  { icon: "🎙️", title: "Podcast exclusivo BATEV", desc: "¿Cada inteligente? — PI Proyectos Inteligentes" },
   { icon: "✅", title: "Checklist profesional", desc: "Para viviendas inteligentes" },
   { icon: "🔧", title: "Guía de preinstalación", desc: "Canalizaciones recomendadas" },
   { icon: "📊", title: "Diagnóstico personalizado", desc: "Score tecnológico de tu obra" },

@@ -171,7 +171,7 @@ Colocá los archivos en `public/resources/`:
 public/resources/
 ├── libro.pdf
 ├── audiolibro.mp3
-├── podcast.mp3
+├── podcast.m4a
 ├── checklist.pdf
 ├── canalizaciones.pdf
 └── errores.pdf

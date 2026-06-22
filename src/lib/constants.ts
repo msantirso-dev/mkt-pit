@@ -161,10 +161,10 @@ export const DIGITAL_RESOURCES = [
   },
   {
     id: "podcast",
-    title: "Podcast exclusivo BATEV",
-    description: "Contenido exclusivo de la feria BATEV",
+    title: "Podcast: ¿Cada inteligente?",
+    description: "Podcast exclusivo BATEV — PI Proyectos Inteligentes",
     type: "audio" as const,
-    url: "/resources/podcast.mp3",
+    url: "/resources/podcast.m4a",
   },
   {
     id: "checklist",
